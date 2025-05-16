@@ -2,7 +2,17 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "机场订阅"
+    url: "https://xn--cp3a08l.com/api/v1/client/subscribe?token=91b716327dc3117c5341652c46c416e8&flag=meta"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+proxy-providers:
+  Airport2:
+    url: "https://xn--cp3a08l.com/api/v1/client/subscribe?token=47a503748958e7bdb6e6ce6c69d1b525"
     type: http
     interval: 86400
     health-check:
@@ -92,6 +102,7 @@ dns:
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
+    - 202.102.128.68
  
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
@@ -127,6 +138,11 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
+  - SRC-IP-CIDR,192.168.6.174/32,直连
+  - SRC-IP-CIDR,192.168.6.183/32,直连
+  - SRC-IP-CIDR,192.168.6.177/32,直连
+  - SRC-IP-CIDR,192.168.6.225/32,直连
+  - SRC-IP-CIDR,192.168.6.120/32,直连
   - RULE-SET,private_domain,直连
   - RULE-SET,apple_domain,🍎 Apple
   - RULE-SET,proxylite,🚀 默认代理
